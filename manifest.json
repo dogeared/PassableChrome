@@ -1,0 +1,33 @@
+{
+  "name": "Passable",
+  "version": "0.5",
+  "manifest_version": 2,
+  "description": "Secure once. Write never.",
+  "permissions": [
+    "<all_urls>",
+    "tabs"
+  ],
+  "background": { "scripts": ["js/background.js"] },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "icons": { 
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png" 
+  },
+  "incognito": "spanning"
+}
