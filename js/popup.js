@@ -30,7 +30,8 @@ $(document).ready(function() {
 
   var savedSecret = chrome.extension.getBackgroundPage().savedSecret
   if (savedSecret && savedSecret.length > 0)  {
-    $('#nickname').focus()
     $('#secret').val(chrome.extension.getBackgroundPage().savedSecret)
+    // don't like this, but focus doesn't work otherwise
+    setTimeout(function() { $('#nickname').focus() }, 10)
   }
 })
