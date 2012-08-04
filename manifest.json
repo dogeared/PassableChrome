@@ -7,12 +7,16 @@
     "<all_urls>",
     "tabs"
   ],
-  "background": { "scripts": ["js/background.js"] },
+  "background": { "scripts": [
+    "helpers/keycodes.js",
+    "helpers/sha1.min.js",
+    "js/background.js"
+  ]},
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "images/icon.png",
+    "default_popup": "html/popup.html"
   },
-  "options_page": "options.html",
+  "options_page": "html/options.html",
   "content_scripts": [
     {
       "matches": [
@@ -20,14 +24,16 @@
       ],
       "all_frames": true,
       "js": [
+        "helpers/keycodes.js",
+        "helpers/sha1.min.js",
         "js/content_script.js"
       ]
     }
   ],
   "icons": { 
-    "16": "icon_16.png",
-    "48": "icon_48.png",
-    "128": "icon_128.png" 
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png" 
   },
   "incognito": "spanning"
 }
