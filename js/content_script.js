@@ -1,7 +1,7 @@
 var keyMap = {
   'Control+Option+Command+A': { fn: 'hex_sha1', half: false },
-  'Control+Option+Command+S': { fn: 'b64_sha1', half: true },
-  'Control+Option+Command+D': { fn: 'hex_sha1', half: false },
+  'Control+Option+Command+S': { fn: 'b64_sha1', half: false },
+  'Control+Option+Command+D': { fn: 'hex_sha1', half: true },
   'Control+Option+Command+F': { fn: 'b64_sha1', half: true }
 }
 

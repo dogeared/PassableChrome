@@ -1,31 +1,38 @@
-function doPass(func, half) {
-  var pw = func.apply(this,[$('#secret').val()+$('#nickname').val()])
-  pw = (half) ? pw.substring(0,pw.length/2) : pw
-  if (localStorage['show_password'] === 'true') $('#password').val(pw)
-  if (localStorage['save_secret'] === 'true')
-    chrome.extension.getBackgroundPage().savedSecret = $('#secret').val()
-  chrome.tabs.getSelected(null, function(tab) {
-    chrome.tabs.sendRequest(tab.id, {fillFocus: pw})
-    if (localStorage['close_popup'] === 'true')
-      chrome.tabs.update(tab.id, {selected: true})
-  })
+function processClick(proc) {
+  chrome.extension.sendRequest(
+    {'nickname': $('#nickname').val(), secret: $('#secret').val(), proc: proc},
+    function(request) {
+      if (request.fillFocus) { $('#password').val(request.fillFocus) }
+    }
+  )
 }
 
 $(document).ready(function() {
   $('#superman').click(function() {
-    doPass(hex_sha1)
+    processClick({fn: 'hex_sha1', half: false})
   })
 
   $('#extremely').click(function() {
-    doPass(b64_sha1)
+    processClick({fn: 'b64_sha1', half: false})
   })
 
   $('#very').click(function() {
-    doPass(hex_sha1, true)
+    processClick({fn: 'hex_sha1', half: true})
   })
 
   $('#strong').click(function() {
-    doPass(b64_sha1, true)
+    processClick({fn: 'b64_sha1', half: true})
+  })
+
+  // This doesn't work. Don't know why
+  /*
+   *$('#secret').keyDown(function() {
+   *  chrome.extension.getBackgroundPage().savedSecret = $('#secret').val()
+   *})
+   */
+
+  document.getElementById('secret').addEventListener('keydown', function() { 
+    chrome.extension.getBackgroundPage().savedSecret = $('#secret').val()
   })
 
   var savedSecret = chrome.extension.getBackgroundPage().savedSecret
