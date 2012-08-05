@@ -1,16 +1,75 @@
 <!DOCTYPE html>
   <head>
     <script type="text/javascript" src="../helpers/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="../helpers/keycodes.js"></script>
+    <script type="text/javascript" src="../js/tabs.js"></script>
     <script type="text/javascript" src="../js/options.js"></script>
+    <style>
+      body {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 22px;
+      }
+      input {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 22px;
+      }
+      .key_item {
+        white-space: nowrap;
+      }
+      .key_label {
+        width: 450px;
+        float: left;
+      }
+      .key_input {
+        width: 300px;
+        display: inline;
+      }
+    </style>
   </head>
   <body>
     PassableChrome is an extension that allows you to generate highly secure
-    passwords.<p/>
+    passwords. See Usage instructions below.<p/>
+ 
+    <p>NOTE: Any settings changes are saved instantaneously.</p>
+    
+    <b>Secret</b><p/>
 
-    You put in a long secret phrase that doesn't change.<p/>
+    <div id="empty_message" style="color:red"> 
+    You must enter a secret phrase in order to generate passwords.
+    </div>    
+    <input id="secret" type="password" size="38"><p/>
 
-    For each site, you put in a short unique nickname. It should be something
-    easy for you to remember.<p/>
+    <b>Secret Timeout</b><p/>
+
+    The secret will be reset every 
+    <input id="secret_interval" type="text" size="2">
+    hours <input id="units_hours" name="units" type="radio" value="hours"> 
+    minutes <input id="units_minutes" name="units" type="radio" value="minutes">
+    <p/>
+
+    <b>Strength</b>:<p/>
+  
+    <p> 
+      <div class="key_label"><label>Superman Strong (40 character password):</label></div>
+      <div class="key_input"><input id="superman" type="text" size="38"></input></div>
+    </p>
+    <p> 
+      <div class="key_label"><label>Extremely Strong (28 character password):</label></div>
+      <div class="key_input"><input id="extremely" type="text" size="38"></input></div>
+    </p>
+    <p> 
+      <div class="key_label"><label>Very Strong (20 character password):</label></div>
+      <div class="key_input"><input id="very" type="text" size="38"></input></div>
+    </p>
+    <p> 
+      <div class="key_label"><label>Strong (14 character password):</label></div>
+      <div class="key_input"><input id="strong" type="text" size="38"></input></div>
+    </p>
+
+    <b>Usage</b><p/>
+
+    Passwords are generated using a long secret phrase in conjunction with a
+    site nickname. The nickname should be something easy for you to remember.<p/>
 
     You can generate passwords in lengths of 40, 28, 20 or 14 characters.
     While it would be ideal and most secure to always use 40 characters, some
@@ -24,8 +83,16 @@
     is ever stored to your local disk or anywhere on the Internet.<p/>
 
     For more information, see the 
-    <a href="http://afitnerd.com/projects/passable" target="_blank">
-    Passable</a> project page.<p/>
+    <a href="http://afitnerd.com/projects/passable" target="_blank">Passable</a> 
+    project page.<p/>
+    
+    <p>Put in a long secret phrase above.</p>
 
+    <p>When you are on a password field of a website, enter your nickname for that site
+    and hit one of the strength key sequences above. The nickname will be replaced with
+    the generated password.</p>
+
+    <p>You can change the strength key sequence to generate a password by clicking in
+    one of the fields above and hitting a new key sequence.</p>
   </body>
 </html>

@@ -1,9 +1,4 @@
-var keyMap = {
-  'Control+Option+Command+A': { fn: 'hex_sha1', half: false },
-  'Control+Option+Command+S': { fn: 'b64_sha1', half: false },
-  'Control+Option+Command+D': { fn: 'hex_sha1', half: true },
-  'Control+Option+Command+F': { fn: 'b64_sha1', half: true }
-}
+var keyMap = {}
 
 function setSelectedElement(val) {
   var focused = document.activeElement
@@ -19,13 +14,18 @@ function setSelectedElement(val) {
 }
 
 function onExtensionMessage(request) {
-  if (request['fillFocus'] !== undefined) {
-    setSelectedElement(request['fillFocus'])
-  } 
+  if (request.fillFocus) {
+    setSelectedElement(request.fillFocus)
+  } else if (request.keyMap) {
+    keyMap = request.keyMap
+  } else if (request.error) {
+    chrome.extension.sendRequest({showOptions: true, error: request.error})
+  }
 }
 
 function initContentScript() {
   chrome.extension.onRequest.addListener(onExtensionMessage)
+  chrome.extension.sendRequest({initKeyMap: true}, onExtensionMessage);
 
   document.addEventListener('keydown', function(evt) {
     var keyStr = keyEventToString(evt)

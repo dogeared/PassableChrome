@@ -3,6 +3,7 @@
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
  */
+var strengths = ['superman', 'extremely', 'very', 'strong']
 
 var KEY_MAP = {
   12: 'Clear',
@@ -84,11 +85,44 @@ function keyEventToString(evt) {
   return tokens.join('+');
 }
 
+function getDefaultKeyStrings() {
+  return {
+    superman: keyEventToString({
+      keyCode: 65,  // 'a'
+      shiftKey: false,
+      altKey: true,
+      ctrlKey: true,
+      metaKey: true
+    }),
+    extremely: keyEventToString({
+      keyCode: 83,  // 's'
+      shiftKey: false,
+      altKey: true,
+      ctrlKey: true,
+      metaKey: true
+    }),
+    very: keyEventToString({
+      keyCode: 68,  // 'd'
+      shiftKey: false,
+      altKey: true,
+      ctrlKey: true,
+      metaKey: true
+    }),
+    strong: keyEventToString({
+      keyCode: 70,  // 'f'
+      shiftKey: false,
+      altKey: true,
+      ctrlKey: true,
+      metaKey: true
+    })
+  }
+}
+
 function getDefaultKeyString() {
   return keyEventToString({
-    keyCode: 83,  // 's'
-    shiftKey: true,
+    keyCode: 65,  // 'a'
+    shiftKey: false,
     altKey: true,
     ctrlKey: true,
-    metaKey: false});
+    metaKey: true});
 }
