@@ -13,7 +13,7 @@ function load() {
   
   document.getElementById('secret_interval').addEventListener('keyup', function() { 
     localStorage.secret_interval = $('#secret_interval').val()
-    chrome.extension.getBackgroundPage().init()
+    chrome.extension.getBackgroundPage().updateInterval()
   })
   
   document.getElementById('secret').addEventListener('keyup', function() { 
@@ -27,12 +27,12 @@ function load() {
 
   $('#units_hours').click(function() {
     localStorage.units = 'hours'
-    chrome.extension.getBackgroundPage().init()
+    chrome.extension.getBackgroundPage().updateInterval()
   })
 
   $('#units_minutes').click(function() {
     localStorage.units = 'minutes'
-    chrome.extension.getBackgroundPage().init()
+    chrome.extension.getBackgroundPage().updateInterval()
   })
 
   var defaultKeyStrings = getDefaultKeyStrings()

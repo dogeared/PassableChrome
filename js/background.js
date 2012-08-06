@@ -22,6 +22,17 @@ function getKeyMap() {
   return keyMap
 }
 
+function updateInterval() {
+  var multiplier = (localStorage.units && localStorage.units === 'minutes')?
+    1000*60:1000*60*60
+  var interval = (localStorage.secret_interval)?
+    parseInt(localStorage.secret_interval)*multiplier:24*1000*60*60
+  if (intervalFunc) clearInterval(intervalFunc)
+  intervalFunc = setInterval(function() {
+    savedSecret = ""
+  }, interval)
+}
+
 function init() {
   var self = this
 
@@ -29,20 +40,15 @@ function init() {
   var prevVersion = localStorage.version||"0.0"
   var firstTime = localStorage.firstTime||true
 
+  //alert("cur: " + curVersion + ", pre: " + prevVersion + ", first: " + firstTime + ", options?: " + (firstTime || (prevVersion !== curVersion)))
+
   if (firstTime || (prevVersion !== curVersion)) {
     localStorage.version = curVersion
     localStorage.firstTime = false
     chrome.tabs.create({url: "../html/options.html"});
   }
 
-  var multiplier = (localStorage.units && localStorage.units === 'minutes')?
-    1000*60:1000*60*60
-  var interval = (localStorage['secret_interval'])?
-    parseInt(localStorage['secret_interval'])*multiplier:24*1000*60*60
-  if (intervalFunc) clearInterval(intervalFunc)
-  intervalFunc = setInterval(function() {
-    savedSecret = ""
-  }, interval)
+  updateInterval()
 
   sendKeysToAllTabs(getKeyMap())
 
