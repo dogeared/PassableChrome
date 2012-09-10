@@ -8,6 +8,11 @@ function processClick(proc) {
 }
 
 $(document).ready(function() {
+  $("#options").click(function(e) { 
+    e.preventDefault();  
+    chrome.tabs.create({url:chrome.extension.getURL("html/options.html")})
+  });
+
   $('#superman').click(function() {
     processClick({fn: 'hex_sha1', half: false})
   })

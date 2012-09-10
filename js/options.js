@@ -78,5 +78,7 @@ function load() {
 }
 
 $(document).ready(function() {
-  load()
+  load();
+  var tour = setupTour();
+  tour.start(true);
 })

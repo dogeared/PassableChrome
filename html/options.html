@@ -1,70 +1,89 @@
 <!DOCTYPE html>
   <head>
-    <script type="text/javascript" src="../helpers/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="../helpers/jquery.min.js"></script>
+    <script type="text/javascript" src="../helpers/bootstrap.min.js"></script>
     <script type="text/javascript" src="../helpers/keycodes.js"></script>
     <script type="text/javascript" src="../js/tabs.js"></script>
     <script type="text/javascript" src="../js/options.js"></script>
-    <style>
-      body {
-        font-family: arial, helvetica, sans-serif;
-        font-size: 22px;
-      }
-      input {
-        font-family: arial, helvetica, sans-serif;
-        font-size: 22px;
-      }
-      .key_item {
-        white-space: nowrap;
-      }
-      .key_label {
-        width: 450px;
-        float: left;
-      }
-      .key_input {
-        width: 300px;
-        display: inline;
-      }
-    </style>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    PassableChrome is an extension that allows you to generate highly secure
-    passwords. See Usage instructions below.<p/>
+    <div class="row-fluid">
+      <div class="span8 offset2 alert alert-info">
+        <p>PassableChrome is an extension that allows you to generate highly secure 
+        passwords. See Usage instructions below.</p>
  
-    <p>NOTE: Any settings changes are saved instantaneously.</p>
-    
-    <b>Secret</b><p/>
-
-    <div id="empty_message" style="color:red"> 
-    You must enter a secret phrase in order to generate passwords.
-    </div>    
-    <input id="secret" type="password" size="38"><p/>
-
-    <b>Secret Timeout</b><p/>
-
-    The secret will be reset every 
-    <input id="secret_interval" type="text" size="2">
-    hours <input id="units_hours" name="units" type="radio" value="hours"> 
-    minutes <input id="units_minutes" name="units" type="radio" value="minutes">
-    <p/>
-
-    <b>Strength</b>:<p/>
-  
-    <p> 
-      <div class="key_label"><label>Superman Strong (40 character password):</label></div>
-      <div class="key_input"><input id="superman" type="text" size="38"></input></div>
-    </p>
-    <p> 
-      <div class="key_label"><label>Extremely Strong (28 character password):</label></div>
-      <div class="key_input"><input id="extremely" type="text" size="38"></input></div>
-    </p>
-    <p> 
-      <div class="key_label"><label>Very Strong (20 character password):</label></div>
-      <div class="key_input"><input id="very" type="text" size="38"></input></div>
-    </p>
-    <p> 
-      <div class="key_label"><label>Strong (14 character password):</label></div>
-      <div class="key_input"><input id="strong" type="text" size="38"></input></div>
-    </p>
+        <p>NOTE: Any settings changes are saved instantaneously.</p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>Secret</td>
+              <td>
+                <input class="input-xxlarge" id="secret" type="password" size="38">
+                <div id="empty_message" style="color:red"> 
+                  You must enter a secret phrase in order to generate passwords.
+                </div>    
+              </td>
+            </tr>
+            <tr>
+              <td>Secret Timeout</td>
+              <td>
+                <input class="input-mini" id="secret_interval" type="text" size="2">
+                <label class="radio inline">
+                  <input id="units_hours" name="units" type="radio" value="hours"> hours
+                </label>
+                <label class="radio inline">
+                  <input id="units_minutes" name="units" type="radio" value="minutes"> minutes
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Strength</td>
+              <td>
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 8px 8px 8px 0px">
+                        <div class="key_input input-append">
+                          <input id="superman" type="text" size="38"><span class="btn btn-success add-on" style="text-shadow: none;">Superman Strong (40 character password)</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 8px 8px 0px">
+                        <div class="key_input input-append">
+                          <input id="extremely" type="text" size="38"><span class="btn btn-primary add-on" style="text-shadow: none;">Extremely Strong (28 character password)</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 8px 8px 0px">
+                        <div class="key_input input-append">
+                          <input id="very" type="text" size="38"><span class="btn btn-warning add-on" style="text-shadow: none;">Very Strong (20 character password)</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 8px 8px 0px">
+                        <div class="key_input input-append">
+                          <input id="strong" type="text" size="38"><span class="btn btn-danger add-on" style="text-shadow: none;">Strong (14 character password)</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2 alert alert-success">
 
     <b>Usage</b><p/>
 
@@ -94,5 +113,7 @@
 
     <p>You can change the strength key sequence to generate a password by clicking in
     one of the fields above and hitting a new key sequence.</p>
+  </div>
+</div>
   </body>
 </html>

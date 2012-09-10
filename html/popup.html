@@ -2,18 +2,25 @@
   <head>
     <title>PassableChrome</title>
 
-    <script type="text/javascript" src="../helpers/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="../helpers/jquery.min.js"></script>
+    <script type="text/javascript" src="../helpers/bootstrap.min.js"></script>
     <script type="text/javascript" src="../helpers/sha1.min.js"></script>
     <script type="text/javascript" src="../js/popup.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    <div style="margin: 5px;">
     <input id="secret" type="password" placeholder="secret" size="40">
     <input id="nickname" type="text" placeholder="nickname" size="40">
-    <br/>
-    <input id="superman" type="button" value="Superman - 40"><br/>
-    <input id="extremely" type="button" value="Extremely - 28"><br/>
-    <input id="very" type="button" value="Very - 20"><br/>
-    <input id="strong" type="button" value="Strong - 14"><br/>
     <input id="password" type="text" placeholder="generated password" size="40">
+    <hr style="margin: 0px;">
+    Password Strength:
+    <p><button id="superman" class="btn btn-success">Superman - 40</button></p>
+    <p><button id="extremely" class="btn btn-primary">Extremely - 28</button></p>
+    <p><button id="very" class="btn btn-warning">Very - 20</button></p>
+    <p><button id="strong" class="btn btn-danger">Strong - 14</button></p>
+    <hr style="margin: 0px 0px 2px 0px;">
+    <button id="options" class="btn btn-inverse">options</button>
+    </div>
   </body>
 </html>
