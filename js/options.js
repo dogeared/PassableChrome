@@ -79,6 +79,4 @@ function load() {
 
 $(document).ready(function() {
   load();
-  var tour = setupTour();
-  tour.start(true);
 })
