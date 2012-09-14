@@ -1,9 +1,10 @@
-/**
- * Copyright (c) 2011 The Chromium Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file.
- */
-var strengths = ['superman', 'extremely', 'very', 'strong']
+var strengths = ['superman', 'extremely', 'very', 'strong'];
+
+var OSName="Unknown OS";
+if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
 
 var KEY_MAP = {
   12: 'Clear',
@@ -86,34 +87,36 @@ function keyEventToString(evt) {
 }
 
 function getDefaultKeyStrings() {
+  var shiftKey = (OSName === 'MacOS')?false:true;
+  var metaKey = (OSName === 'MacOS')?true:false;
   return {
     superman: keyEventToString({
       keyCode: 65,  // 'a'
-      shiftKey: false,
+      shiftKey: shiftKey,
       altKey: true,
       ctrlKey: true,
-      metaKey: true
+      metaKey: metaKey
     }),
     extremely: keyEventToString({
       keyCode: 83,  // 's'
-      shiftKey: false,
+      shiftKey: shiftKey,
       altKey: true,
       ctrlKey: true,
-      metaKey: true
+      metaKey: metaKey
     }),
     very: keyEventToString({
       keyCode: 68,  // 'd'
-      shiftKey: false,
+      shiftKey: shiftKey,
       altKey: true,
       ctrlKey: true,
-      metaKey: true
+      metaKey: metaKey
     }),
     strong: keyEventToString({
       keyCode: 70,  // 'f'
-      shiftKey: false,
+      shiftKey: shiftKey,
       altKey: true,
       ctrlKey: true,
-      metaKey: true
+      metaKey: metaKey
     })
   }
 }
