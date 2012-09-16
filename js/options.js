@@ -77,6 +77,113 @@ function load() {
   })
 }
 
-$(document).ready(function() {
+function getGuiderObj(_id, _next, options) {
+  function guideShow() {
+    $('#tour').hide();
+  }
+
+  function guideHide() {
+    $('#tour').show();
+  }
+
+  var prev = {name: "Prev", onclick: guiders.prev};
+  var next = {name: "Next", onclick: guiders.next};
+  var end = {name: "End Tour", onclick: guiders.hideAll};
+
+  var ret= {
+    buttons: [prev, next, end],
+    position: 3,
+    width: 200,
+    onShow: guideShow,
+    onHide: guideHide,
+    id: _id,
+    next: _next
+  }
+  $.extend(ret, options);
+  return ret;
+}
+
+function setupTour() {
+  var welcome = getGuiderObj("first", "second", {
+    width: 600,
+    overlay: true,
+    description: "Passable",
+    title: "Welcome to Passable Chrome",
+  });
+  // delet prev button
+  welcome.buttons.splice(0,1);
+  guiders.createGuider(welcome);
+
+  var secret = getGuiderObj("second", "third", {
+    attachTo: ".tour_secret",
+    description: "Secret",
+    title: "Secret",
+  });
+  guiders.createGuider(secret);
+
+  var secret2 = getGuiderObj("third", "fourth", {
+    attachTo: ".tour_secret",
+    description: "Secret",
+    title: "Secret",
+    overlay: true,
+    highlight: "#secret"
+  });
+  guiders.createGuider(secret2);
+ 
+  var timeout = getGuiderObj("fourth", "fifth", {
+    attachTo: ".tour_timeout",
+    description: "Timeout",
+    title: "Timeout",
+  });
+  guiders.createGuider(timeout);
+ 
+  var strength = getGuiderObj("fifth", "sixth", {
+    attachTo: ".tour_strength",
+    position: 7,
+    description: "Strength",
+    title: "Strength",
+  });
+  guiders.createGuider(strength);
+
+  var superman = getGuiderObj("sixth", "seventh", {
+    attachTo: ".tour_superman",
+    description: "Superman",
+    title: "Superman",
+  });
+  guiders.createGuider(superman);
+
+  var extremely = getGuiderObj("seventh", "eigth", {
+    attachTo: ".tour_extremely",
+    description: "Extremely",
+    title: "Extremely",
+  });
+  guiders.createGuider(extremely);
+
+  var very = getGuiderObj("eigth", "ninth", {
+    attachTo: ".tour_very",
+    description: "Very",
+    title: "Very",
+  });
+  guiders.createGuider(very);
+
+  var strong = getGuiderObj("ninth", "", {
+    attachTo: ".tour_strong",
+    description: "Strong",
+    title: "Strong",
+  });
+  // delete next button
+  strong.buttons.splice(1,1);
+  guiders.createGuider(strong);
+  
+  $('#tour').click(function(){guiders.show('first')});
+
+  if (!$.cookie('has_seen_tour')) {
+    $.cookie('has_seen_tour', 'true');
+    guiders.show('first');
+  }
+}
+
+(function($) {
   load();
-})
+  setupTour();
+})(jQuery)

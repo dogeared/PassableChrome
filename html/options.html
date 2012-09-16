@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <head>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/guiders-1.2.8.css" rel="stylesheet"/>
   </head>
   <body>
     <div class="row-fluid">
@@ -13,6 +14,7 @@
         passwords. See Usage instructions below.</p>
  
         <p>NOTE: Any settings changes are saved instantaneously.</p>
+        <p><button id="tour" class="btn btn-inverse">Guided Tour</button></p>
       </div>
       <div class="span3">
       </div>
@@ -24,7 +26,7 @@
             <tr>
               <td>Secret</td>
               <td>
-                <input class="input-xxlarge" id="secret" type="password" size="38">
+                <input class="input-xxlarge tour_secret" id="secret" type="password" size="38">
                 <div id="empty_message" style="color:red"> 
                   You must enter a secret phrase in order to generate passwords.
                 </div>    
@@ -37,41 +39,41 @@
                 <label class="radio inline">
                   <input id="units_hours" name="units" type="radio" value="hours"> hours
                 </label>
-                <label class="radio inline">
+                <label class="radio inline tour_timeout">
                   <input id="units_minutes" name="units" type="radio" value="minutes"> minutes
                 </label>
               </td>
             </tr>
             <tr>
-              <td>Strength</td>
+              <td><label class="tour_strength">Strength</label></td>
               <td>
                 <table class="table table-hover">
                   <tbody>
                     <tr>
                       <td style="padding: 8px 8px 8px 0px">
                         <div class="key_input input-append">
-                          <input id="superman" type="text" size="38"><span class="btn btn-success add-on" style="text-shadow: none;">Superman Strong (40 character password)</span>
+                          <input id="superman" type="text" size="38"><span class="btn btn-success add-on tour_superman" style="text-shadow: none;">Superman Strong (40 character password)</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 8px 8px 0px">
                         <div class="key_input input-append">
-                          <input id="extremely" type="text" size="38"><span class="btn btn-primary add-on" style="text-shadow: none;">Extremely Strong (28 character password)</span>
+                          <input id="extremely" type="text" size="38"><span class="btn btn-primary add-on tour_extremely" style="text-shadow: none;">Extremely Strong (28 character password)</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 8px 8px 0px">
                         <div class="key_input input-append">
-                          <input id="very" type="text" size="38"><span class="btn btn-warning add-on" style="text-shadow: none;">Very Strong (20 character password)</span>
+                          <input id="very" type="text" size="38"><span class="btn btn-warning add-on tour_very" style="text-shadow: none;">Very Strong (20 character password)</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 8px 8px 0px">
                         <div class="key_input input-append">
-                          <input id="strong" type="text" size="38"><span class="btn btn-danger add-on" style="text-shadow: none;">Strong (14 character password)</span>
+                          <input id="strong" type="text" size="38"><span class="btn btn-danger add-on tour_strong" style="text-shadow: none;">Strong (14 character password)</span>
                         </div>
                       </td>
                     </tr>
@@ -120,7 +122,9 @@
       </div>
     </div>
     <script type="text/javascript" src="../helpers/jquery.min.js"></script>
+    <script type="text/javascript" src="../helpers/jquery.cookie.js"></script>
     <script type="text/javascript" src="../helpers/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../helpers/guiders-1.2.8.js"></script>
     <script type="text/javascript" src="../helpers/keycodes.js"></script>
     <script type="text/javascript" src="../js/tabs.js"></script>
     <script type="text/javascript" src="../js/options.js"></script>
