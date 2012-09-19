@@ -104,6 +104,8 @@ function getGuiderObj(_id, _next, options) {
 }
 
 function setupTour() {
+  var supermanStr = getDefaultKeyStrings().superman;
+
   var welcomeDesc = "<p>Passable empowers you to have different, high strength passwords for every website you visit.<br>" + 
     "<p>All you need is a long secret phrase and then a nickname for each website you want a password for.</p>" +
     "<p><b>You don't ever have to remember the password</b>. All you need to remember is the nickname. Your secret phrase is stored "+
@@ -113,15 +115,18 @@ function setupTour() {
     "<li>In the password field on a webpage, enter your nickname for that website." +
     "<li>Hit the hotkey for the password strength desired." +
     "<li>The nickname will automatically be replaced with the generated password.</ol>" +
-    "<p>Continue the tour to learn about how to interact with Passable.</p>";
+    "<p>There is a live example of interacting with Passable at the end of the tour.</p>";
   var welcome = getGuiderObj("first", "second", {
     width: 600,
     overlay: true,
     description: welcomeDesc,
     title: "Welcome to Passable Chrome",
   });
-  // delet prev button
+  // delete prev button
   welcome.buttons.splice(0,1);
+  // add button
+  welcome.buttons.splice(1,0, { name: 'Jump to Live Example', 
+    onclick: function() {guiders.hideAll(); guiders.show('tenth')} });
   guiders.createGuider(welcome);
 
   var secretDesc = "<p>Your secret is a long phrase that you will remember. All standard characters and symbols (including spaces) " +
@@ -192,15 +197,66 @@ function setupTour() {
 
   var strongDesc = "<p>The hotkey to generate Strong passwords is set to the left. Click in the field to the left and " +
     "hit any key sequence to replace the default hotkey with a custom value of your choosing.</p>";
-  var strong = getGuiderObj("ninth", "", {
+  var strong = getGuiderObj("ninth", "tenth", {
     attachTo: ".tour_strong",
     description: strongDesc,
     title: "Strong",
   });
-  // delete next button
-  strong.buttons.splice(1,1);
   guiders.createGuider(strong);
+
+  var exampleDesc = 
+    '<div class="table table-stripe">' +
+    '<table><tbody>' +
+    '<tr><td>Secret</td>' +
+    '<td><input id="secret-help" class="input-xlarge" placeholder="Type a secret phrase"></td></tr>' +
+    '<tr><td>Nickname</td>' +
+    '<td><input id="nick-help" class="input-xlarge" placeholder="Type a nickname">' + 
+    '<div id="nick-help-info"></div></td></tr>' +
+    '</tbody></table>' +
+    '</div>';
+  var example = getGuiderObj("tenth", "", {
+    width: 500,
+    overlay: true,
+    description: exampleDesc,
+    title: "Passable Live Example",
+  });
+  // delete next button
+  example.buttons.splice(1,1);
+  guiders.createGuider(example);
+
+
+  var nickHelpText = 
+    'Now, press the hotkey combination for a superman strong password: ' + 
+    '<span style="color: red">' + supermanStr + '</span>';
+  var passHelpText = 
+    '<p>The nickname you typed has now been replaced by the generated password.</p>' +
+    '<p>When logging in to a website, you would put your nickname in the password ' +
+    'field and press the appropriate hotkey combination, just like you did here. ' +
+    'The generated password would replace the nickname and you would be ready to ' +
+    'log into the website.';
+
+  $('#nick-help-info').hide();
+  $('#nick-help-info').html(nickHelpText);
   
+  document.addEventListener('keydown', function(evt) {
+    var keyStr = keyEventToString(evt);
+    if (keyStr !== supermanStr) { return true }
+    $('#nick-help').val(hex_sha1($('#secret-help').val()+$('#nick-help').val()));
+    $('#nick-help-info').html(passHelpText);
+    evt.stopPropagation()
+    evt.preventDefault()
+    return false
+  }, false);
+
+  document.getElementById('nick-help').addEventListener('keyup', function() { 
+    if ($('#nick-help').val().length > 0) {
+      $('#nick-help-info').show()
+    } else {
+      $('#nick-help-info').html(nickHelpText);
+      $('#nick-help-info').hide()
+    }
+  });
+
   $('#tour').click(function(){guiders.show('first')});
 
   if (!$.cookie('has_seen_tour')) {
