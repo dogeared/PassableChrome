@@ -260,7 +260,7 @@ function setupTour() {
   $('#tour').click(function(){guiders.show('first')});
 
   if (!$.cookie('has_seen_tour')) {
-    $.cookie('has_seen_tour', 'true');
+    $.cookie('has_seen_tour', 'true', { expires: 3650 });
     guiders.show('first');
   }
 }
