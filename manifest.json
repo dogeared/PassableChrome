@@ -1,6 +1,6 @@
 {
   "name": "Passable",
-  "version": "0.17",
+  "version": "1.0",
   "description": "Secure once. Write never.",
   "permissions": [ "tabs", "contextMenus", "\u003Call_urls\u003E" ],
   "manifest_version": 2,
