@@ -1,11 +1,3 @@
-function showEmptyMessage() {
-  if ($('#secret').val().length <= 0) {
-    $('#empty_message').show()
-  } else {
-    $('#empty_message').hide()
-  }
-}
-
 function load() {
   $('#secret_interval').
     val(localStorage.secret_interval||24)
@@ -18,12 +10,10 @@ function load() {
   
   document.getElementById('secret').addEventListener('keyup', function() { 
     chrome.extension.getBackgroundPage().savedSecret = $('#secret').val()
-    showEmptyMessage()
   })
 
   $('#secret').val(chrome.extension.getBackgroundPage().savedSecret)
   $('#secret').focus()
-  showEmptyMessage()
 
   $('#units_hours').click(function() {
     localStorage.units = 'hours'
