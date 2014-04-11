@@ -15,6 +15,18 @@ function load() {
   $('#secret').val(chrome.extension.getBackgroundPage().savedSecret)
   $('#secret').focus()
 
+  $('#confirm_secret').blur(function() {
+    if (!$('#confirm_secret').val()) { return; }
+    var matches = $('#secret').val() === $('#confirm_secret').val()
+    var matchesText = (matches) ? 'match' : 'does not match'
+    $('#confirm_secret').tooltip('destroy')
+    $('#confirm_secret').tooltip({title: matchesText})
+    $('#confirm_secret').tooltip('show')
+    setTimeout(function() {
+      $('#confirm_secret').tooltip('hide')
+    }, 2000)
+  })
+
   $('#units_hours').click(function() {
     localStorage.units = 'hours'
     chrome.extension.getBackgroundPage().updateInterval()
